@@ -12,7 +12,6 @@ class AddContact : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_contact)
-        val contacts = intent.extras?.get("friends") as FriendsController
         val extra_number = intent.extras?.get("phone") as String
         val name = findViewById<EditText>(R.id.editTextTextPersonName2)
         val number = findViewById<EditText>(R.id.editTextNumberDecimal2)
@@ -24,9 +23,9 @@ class AddContact : AppCompatActivity(){
                 val myToast = Toast.makeText(this, "Invalid Name or Number!", Toast.LENGTH_SHORT)
                 myToast.show()
             }else{
-                contacts.add_friend(name.text.toString(), number.text.toString())
                 val intent = Intent()
-                intent.putExtra("res", contacts)
+                intent.putExtra("name", name.text.toString())
+                intent.putExtra("phone", number.text.toString())
                 setResult(RESULT_OK, intent)
                 finish()
             }

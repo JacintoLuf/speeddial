@@ -9,7 +9,8 @@ import android.widget.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var friends: FriendsController
+    //var friends: FriendsController = TODO()
+    var contacts: MutableList<Friend> = ArrayList()
     var dialed = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,40 +39,40 @@ class MainActivity : AppCompatActivity() {
             update(btn0.text.toString())
         }
         btn1.setOnClickListener {
-            update(btn0.text.toString())
+            update(btn1.text.toString())
         }
         btn2.setOnClickListener {
-            update(btn0.text.toString())
+            update(btn2.text.toString())
         }
         btn3.setOnClickListener {
-            update(btn0.text.toString())
+            update(btn3.text.toString())
         }
         btn4.setOnClickListener {
-            update(btn0.text.toString())
+            update(btn4.text.toString())
         }
         btn5.setOnClickListener {
-            update(btn0.text.toString())
+            update(btn5.text.toString())
         }
         btn6.setOnClickListener {
-            update(btn0.text.toString())
+            update(btn6.text.toString())
         }
         btn7.setOnClickListener {
-            update(btn0.text.toString())
+            update(btn7.text.toString())
         }
         btn8.setOnClickListener {
-            update(btn0.text.toString())
+            update(btn8.text.toString())
         }
         btn9.setOnClickListener {
-            update(btn0.text.toString())
+            update(btn9.text.toString())
         }
         btnStar.setOnClickListener {
-            update(btn0.text.toString())
+            update(btnStar.text.toString())
         }
         btnHash.setOnClickListener {
-            update(btn0.text.toString())
+            update(btnHash.text.toString())
         }
         btnCall.setOnClickListener {
-            update(btn0.text.toString())
+            call()
         }
         btnDel.setOnClickListener {
             val text = number.text.toString()
@@ -83,8 +84,7 @@ class MainActivity : AppCompatActivity() {
         addContact.setOnClickListener{
             if (dialed.length > 1) {
                 val myIntent = Intent(this@MainActivity, AddContact::class.java)
-                myIntent.putExtra("friends", friends)
-                myIntent.putExtra("phone", number.text.toString())
+                myIntent.putExtra("phone", dialed)
                 startActivity(myIntent)
             }else{
                 val myToast = Toast.makeText(this, "No number dialed!", Toast.LENGTH_SHORT)
@@ -96,7 +96,9 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
-            friends = (intent.getSerializableExtra("res") as? FriendsController)!!
+            val name = (intent.getSerializableExtra("name") as? String)!!
+            val phone = (intent.getSerializableExtra("phone") as? String)!!
+            contacts.add(Friend(name, phone))
         }
     }
 
