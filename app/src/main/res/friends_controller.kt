@@ -1,0 +1,2 @@
+class friends_controller {
+}
